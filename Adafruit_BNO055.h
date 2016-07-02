@@ -26,11 +26,21 @@
  #include "WProgram.h"
 #endif
 
+// Add ability for Wire1 and Wire2...
+#define USE_I2C_T3
+#define WireBNO Wire2  
+
 #ifdef __AVR_ATtiny85__
  #include <TinyWireM.h>
- #define Wire TinyWireM
-#else
+ #define WireBNO TinyWireM
+#elif defined (USE_I2C_T3)
+ #include <i2c_t3.h>
+#else   
  #include <Wire.h>
+#endif
+
+#ifndef WireBNO
+  #define WireBNO Wire
 #endif
 
 #include <Adafruit_Sensor.h>
